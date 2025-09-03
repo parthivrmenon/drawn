@@ -1,3 +1,0 @@
-API --> Server --> DB
-Server --> Cache
-Server --> Logger

@@ -1,0 +1,3 @@
+API -(auth)-> Server --> DB
+Server -(hit)-> Cache
+Server --> Logger
