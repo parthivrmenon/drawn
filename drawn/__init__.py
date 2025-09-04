@@ -60,7 +60,7 @@ class Compiler:
         edges: list[Edge],
         output_format: str = "svg",
         comment: str = "Flow",
-        output_file: str = "drawn_flow",
+        output_file: str = "flow",
     ):
         self.nodes = nodes
         self.edges = edges

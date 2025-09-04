@@ -15,7 +15,7 @@ Oceans -(evaporation)-> Evaporation
 ```
 To this diagram:
 
-<img src="./drawn_flow.svg" alt="Water Cycle Diagram" width="300"/>
+<img src="./flow.svg" alt="Water Cycle Diagram" width="300"/>
 
 ## Features
 
