@@ -19,7 +19,7 @@ Oceans -(evaporation)-> Evaporation
 ```
 To this diagram:
 
-<img src="./flow.svg" alt="Water Cycle Diagram" width="300"/>
+<img src="./docs/water_cycle.svg" alt="Water Cycle Diagram" width="300"/>
 
 ## Features
 
@@ -110,32 +110,21 @@ You can configure your diagrams using simple directives with a `%` prefix:
 % edge_penwidth: 0.8         # Edge line thickness (default: 0.8)
 ```
 
-### Example with Custom Styling
-
-```
-API --> Server --> Database
-Server --> Cache
-Server --> Logger
-
-% output_format: svg
-% output_file: architecture
-% comment: System Architecture
-
-% graph_bgcolor: black
-% graph_rankdir: LR
-
-% node_fontcolor: #00FF00
-% node_color: #00FF00
-% node_fillcolor: #222222
-
-% edge_color: red
-% edge_fontcolor: red
-% arrowhead: vee
-```
-
-<img src="./architecture.svg" alt="System Architecture" width="300"/>
-
-Configuration directives can appear anywhere in the file and will be extracted during processing.
+### Examples
+<div align="center">
+<table>
+  <tr>
+    <td><img src="./docs/architecture.svg" alt="System Architecture" width="300"/></td>
+    <td><img src="./docs/microservices.svg" alt="Microservices Architecture" width="300"/></td>
+    <td><img src="./docs/cicd_pipeline.svg" alt="CI/CD Pipeline" width="300"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>System Architecture</b></td>
+    <td align="center"><b>Microservices Architecture</b></td>
+    <td align="center"><b>CI/CD Pipeline</b></td>
+  </tr>
+</table>
+</div>
 
 ## Testing
 

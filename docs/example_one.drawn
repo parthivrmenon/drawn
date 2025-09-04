@@ -15,4 +15,4 @@ Server --> Logger
 
 % edge_color: red
 % edge_fontcolor: red
-% arrowhead: vee
+% edge_arrowhead: vee

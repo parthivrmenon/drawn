@@ -23,8 +23,8 @@
 <!-- API&#45;&gt;Server -->
 <g id="edge1" class="edge">
 <title>API&#45;&gt;Server</title>
-<path fill="none" stroke="red" stroke-width="0.8" d="M54.44,-126C54.44,-126 100.47,-126 100.47,-126"/>
-<polygon fill="red" stroke="red" stroke-width="0.8" points="100.47,-129.5 110.47,-126 100.47,-122.5 100.47,-129.5"/>
+<path fill="none" stroke="red" stroke-width="0.8" d="M54.44,-126C54.44,-126 100.7,-126 100.7,-126"/>
+<polygon fill="red" stroke="red" stroke-width="0.8" points="110.7,-126 100.7,-130.5 106.68,-126 100.7,-126 100.7,-126 100.7,-126 106.68,-126 100.7,-121.5 110.7,-126"/>
 </g>
 <!-- Database -->
 <g id="node3" class="node">
@@ -35,8 +35,8 @@
 <!-- Server&#45;&gt;Database -->
 <g id="edge2" class="edge">
 <title>Server&#45;&gt;Database</title>
-<path fill="none" stroke="red" stroke-width="0.8" d="M179.03,-132C206.3,-132 240.2,-132 240.2,-132 240.2,-132 240.2,-204.55 240.2,-204.55"/>
-<polygon fill="red" stroke="red" stroke-width="0.8" points="236.7,-204.55 240.2,-214.55 243.7,-204.55 236.7,-204.55"/>
+<path fill="none" stroke="red" stroke-width="0.8" d="M179.03,-132C206.3,-132 240.2,-132 240.2,-132 240.2,-132 240.2,-204.79 240.2,-204.79"/>
+<polygon fill="red" stroke="red" stroke-width="0.8" points="240.2,-214.79 235.7,-204.79 240.2,-210.76 240.2,-204.79 240.2,-204.79 240.2,-204.79 240.2,-210.76 244.7,-204.79 240.2,-214.79"/>
 </g>
 <!-- Cache -->
 <g id="node4" class="node">
@@ -47,8 +47,8 @@
 <!-- Server&#45;&gt;Cache -->
 <g id="edge3" class="edge">
 <title>Server&#45;&gt;Cache</title>
-<path fill="none" stroke="red" stroke-width="0.8" d="M178.98,-120C178.98,-120 236.18,-120 236.18,-120"/>
-<polygon fill="red" stroke="red" stroke-width="0.8" points="236.18,-123.5 246.18,-120 236.18,-116.5 236.18,-123.5"/>
+<path fill="none" stroke="red" stroke-width="0.8" d="M178.98,-120C178.98,-120 236.42,-120 236.42,-120"/>
+<polygon fill="red" stroke="red" stroke-width="0.8" points="246.42,-120 236.42,-124.5 242.39,-120 236.42,-120 236.42,-120 236.42,-120 242.39,-120 236.42,-115.5 246.42,-120"/>
 </g>
 <!-- Logger -->
 <g id="node5" class="node">
@@ -59,8 +59,8 @@
 <!-- Server&#45;&gt;Logger -->
 <g id="edge4" class="edge">
 <title>Server&#45;&gt;Logger</title>
-<path fill="none" stroke="red" stroke-width="0.8" d="M145.2,-107.68C145.2,-76.87 145.2,-18 145.2,-18 145.2,-18 232.49,-18 232.49,-18"/>
-<polygon fill="red" stroke="red" stroke-width="0.8" points="232.49,-21.5 242.49,-18 232.49,-14.5 232.49,-21.5"/>
+<path fill="none" stroke="red" stroke-width="0.8" d="M145.2,-107.68C145.2,-76.87 145.2,-18 145.2,-18 145.2,-18 232.72,-18 232.72,-18"/>
+<polygon fill="red" stroke="red" stroke-width="0.8" points="242.72,-18 232.72,-22.5 238.7,-18 232.72,-18 232.72,-18 232.72,-18 238.7,-18 232.72,-13.5 242.72,-18"/>
 </g>
 </g>
 </svg>
