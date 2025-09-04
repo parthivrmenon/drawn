@@ -1,7 +1,111 @@
 import pytest
 import os
 import json
-from drawn import Compiler, Node, Edge, Parser
+from drawn import Compiler, Node, Edge, Parser, Reader, Config
+
+
+def test_reader():
+    r = Reader("./tests/flow.drawn")
+    assert len(r.flows) == 6
+    assert len(r.configs) == 24
+
+
+def test_default_config():
+    default_config = Config()
+    assert default_config.output_file == "flow"
+    assert default_config.output_format == "svg"
+    assert default_config.comment == "Flow"
+
+    # Graph attributes
+    assert default_config.graph_bgcolor == "transparent"
+    assert default_config.graph_dpi == "300"
+    assert default_config.graph_rankdir == "TB"
+    assert default_config.graph_splines == "ortho"
+    assert default_config.graph_pad == "0.2"
+    assert default_config.graph_nodesep == "1"
+    assert default_config.graph_ranksep == "0.8"
+
+    # Node attributes
+    assert default_config.node_fontcolor == "white"
+    assert default_config.node_color == "white"
+    assert default_config.node_margin == "0.15,0.1"
+    assert default_config.node_fontname == "Courier"
+    assert default_config.node_fontsize == "12"
+    assert default_config.node_shape == "box"
+    assert default_config.node_style == "filled"
+    assert default_config.node_fillcolor == "transparent"
+
+    # Edge attributes
+    assert default_config.edge_fontname == "Courier"
+    assert default_config.edge_fontsize == "12"
+    assert default_config.edge_arrowhead == "normal"
+    assert default_config.edge_penwidth == "0.8"
+    assert default_config.edge_color == "white"
+    assert default_config.edge_fontcolor == "white"
+
+
+def test_custom_config():
+    custom_config = Config(
+        [
+            "% output_file: flow",
+            "% output_format: png",
+            "% comment: Flow",
+            # Graph attributes
+            "% graph_bgcolor: white",
+            "% graph_dpi: 300",
+            "% graph_rankdir: TB",
+            "% graph_splines: ortho",
+            "% graph_pad: 0.2",
+            "% graph_nodesep: 1",
+            "% graph_ranksep: 0.8",
+            # Node attributes
+            "% node_fontcolor: white",
+            "% node_color: white",
+            "% node_fontname: Courier",
+            "% node_fontsize: 12",
+            "% node_shape: box",
+            "% node_style: filled",
+            "% node_fillcolor: transparent",
+            "% node_margin: 0.15,0.1",
+            # Edge attributes
+            "% edge_fontname: Courier",
+            "% edge_fontsize: 12",
+            "% edge_arrowhead: normal",
+            "% edge_penwidth: 0.8",
+            "% edge_color: white",
+            "% edge_fontcolor: white",
+        ]
+    )
+    assert custom_config.output_file == "flow"
+    assert custom_config.output_format == "png"
+    assert custom_config.comment == "Flow"
+
+    # Graph attributes
+    assert custom_config.graph_bgcolor == "white"
+    assert custom_config.graph_dpi == "300"
+    assert custom_config.graph_rankdir == "TB"
+    assert custom_config.graph_splines == "ortho"
+    assert custom_config.graph_pad == "0.2"
+    assert custom_config.graph_nodesep == "1"
+    assert custom_config.graph_ranksep == "0.8"
+
+    # Node attributes
+    assert custom_config.node_fontcolor == "white"
+    assert custom_config.node_color == "white"
+    assert custom_config.node_fontname == "Courier"
+    assert custom_config.node_fontsize == "12"
+    assert custom_config.node_shape == "box"
+    assert custom_config.node_style == "filled"
+    assert custom_config.node_fillcolor == "transparent"
+    assert custom_config.node_margin == "0.15,0.1"
+
+    # Edge attributes
+    assert custom_config.edge_color == "white"
+    assert custom_config.edge_fontcolor == "white"
+    assert custom_config.edge_fontname == "Courier"
+    assert custom_config.edge_fontsize == "12"
+    assert custom_config.edge_arrowhead == "normal"
+    assert custom_config.edge_penwidth == "0.8"
 
 
 def test_parser():
@@ -33,7 +137,7 @@ def test_compiler():
         Edge(nodes[3], nodes[4]),
         Edge(nodes[4], nodes[2], "evaporation"),
     ]
-    dot_src = Compiler(nodes, edges).compile()
+    dot_src = Compiler(nodes, edges, Config()).compile()
     assert type(dot_src) == str
     lines = dot_src.splitlines()
     assert "// Flow" in lines[0]
@@ -47,39 +151,3 @@ def test_compiler():
     assert "\tClouds -> Rain [xlabel=precipitation]" in lines
     assert "\tRain -> Oceans" in lines
     assert "\tOceans -> Clouds [xlabel=evaporation]" in lines
-
-
-# from drawn.parser import parse, read_file
-# from drawn.render import render_graphviz
-
-# def test_read_file():
-#     flows = read_file("flow.drawn")
-#     assert len(flows) == 3
-
-# def test_parser():
-#     flows = [
-#         "API -(auth)-> Server --> DB --> Logger",
-#         "Server -(hit)-> Cache",
-#         "Server --> Logger"
-#     ]
-#     edges = parse(flows)
-#     assert len(edges) == 5
-#     assert edges[0] == ("API", "Server","auth")
-#     assert edges[1] == ("Server", "DB", None)
-#     assert edges[2] == ("DB", "Logger", None)
-#     assert edges[3] == ("Server", "Cache", "hit")
-#     assert edges[4] == ("Server", "Logger", None)
-
-
-# def test_render():
-#     flows = [
-#         "API --> Server --> DB",
-#         "Server --> Cache",
-#         "Server --> Logger"
-#     ]
-#     edges = parse(flows)
-#     render_graphviz(edges, "drawn_flow", "png")
-#     assert os.path.exists("drawn_flow.png")
-
-#     # cleanup
-#     #os.remove("drawn_flow.png")

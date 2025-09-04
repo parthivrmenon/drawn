@@ -4,3 +4,31 @@ Clouds -(precipitation)-> Rain
 Rain --> Rivers
 Rivers --> Oceans
 Oceans -(evaporation)-> Evaporation
+
+% output_file: example
+% output_format: svg
+% comment: Example
+
+% graph_bgcolor: black
+% graph_dpi: 300
+% graph_rankdir: TB
+% graph_splines: ortho
+% graph_pad: 0.2
+% graph_nodesep: 1
+% graph_ranksep: 0.8
+
+% node_fontcolor: white
+% node_color: white
+% node_margin: 0.15,0.1
+% node_fontname: Courier
+% node_fontsize: 12
+% node_shape: box
+% node_style: filled
+% node_fillcolor: transparent
+
+% edge_fontname: Courier
+% edge_fontsize: 12
+% edge_arrowhead: normal
+% edge_penwidth: 0.8
+% edge_color: white
+% edge_fontcolor: white

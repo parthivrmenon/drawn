@@ -1,0 +1,18 @@
+API --> Server --> Database
+Server --> Cache
+Server --> Logger
+
+% output_format: svg
+% output_file: architecture
+% comment: System Architecture
+
+% graph_bgcolor: black
+% graph_rankdir: LR
+
+% node_fontcolor: #00FF00
+% node_color: #00FF00
+% node_fillcolor: #222222
+
+% edge_color: red
+% edge_fontcolor: red
+% arrowhead: vee

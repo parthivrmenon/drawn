@@ -5,13 +5,17 @@
 ## Example
 
 From this simple code:
-```bash
+```
 Sun --> Evaporation
 Evaporation -(condensation)-> Clouds
 Clouds -(precipitation)-> Rain
 Rain --> Rivers
 Rivers --> Oceans
 Oceans -(evaporation)-> Evaporation
+
+% output_format: svg
+% output_file: water_cycle
+% comment: Water Cycle Diagram
 ```
 To this diagram:
 
@@ -25,6 +29,7 @@ To this diagram:
 - **Professional output** - High-quality SVG/PNG via Graphviz
 - **Fast rendering** - Instant feedback
 - **Test coverage** - Reliable and maintainable
+- **Inline configuration** - Simple directives using % prefix
 
 ## Philosophy
 
@@ -32,6 +37,7 @@ To this diagram:
 - **Fast feedback** - From idea to diagram in 30 seconds
 - **Git-friendly** - Text-based diagrams that version well
 - **Local-first** - No internet required, no complex setup
+- **Self-contained** - All diagram information in a single file
 
 ## Quick Start
 
@@ -48,6 +54,88 @@ pip install graphviz
 echo "API --> Server --> DB" > flow.drawn
 python main.py flow.drawn
 ```
+
+### Usage
+
+```bash
+# Basic usage
+python main.py flow.drawn
+```
+
+## Configuration
+
+You can configure your diagrams using simple directives with a `%` prefix:
+
+### Basic Configuration
+
+```
+% output_file: filename      # Output filename (default: flow)
+% output_format: svg|png|pdf # Output format (default: svg)
+% comment: My Diagram        # Title for the diagram (default: Flow)
+```
+
+### Graph Attributes
+
+```
+% graph_bgcolor: transparent  # Background color (default: transparent)
+% graph_dpi: 300             # Resolution in DPI (default: 300)
+% graph_rankdir: TB          # Direction: TB (top-bottom), LR (left-right) (default: TB)
+% graph_splines: ortho       # Line style: ortho, curved, etc. (default: ortho)
+% graph_pad: 0.2             # Padding around the graph (default: 0.2)
+% graph_nodesep: 1           # Horizontal separation between nodes (default: 1)
+% graph_ranksep: 0.8         # Vertical separation between nodes (default: 0.8)
+```
+
+### Node Attributes
+
+```
+% node_fontname: Courier     # Font for node labels (default: Courier)
+% node_fontsize: 12          # Font size for node labels (default: 12)
+% node_fontcolor: white      # Font color for node labels (default: white)
+% node_shape: box            # Node shape: box, circle, ellipse, etc. (default: box)
+% node_style: filled         # Node style: filled, dashed, etc. (default: filled)
+% node_fillcolor: transparent # Fill color for nodes (default: transparent)
+% node_color: white          # Border color for nodes (default: white)
+% node_margin: 0.15,0.1      # Margin inside nodes (default: 0.15,0.1)
+```
+
+### Edge Attributes
+
+```
+% edge_fontname: Courier     # Font for edge labels (default: Courier)
+% edge_fontsize: 12          # Font size for edge labels (default: 12)
+% edge_fontcolor: white      # Font color for edge labels (default: white)
+% edge_color: white          # Edge line color (default: white)
+% edge_arrowhead: normal     # Arrow style: normal, vee, dot, etc. (default: normal)
+% edge_penwidth: 0.8         # Edge line thickness (default: 0.8)
+```
+
+### Example with Custom Styling
+
+```
+API --> Server --> Database
+Server --> Cache
+Server --> Logger
+
+% output_format: svg
+% output_file: architecture
+% comment: System Architecture
+
+% graph_bgcolor: black
+% graph_rankdir: LR
+
+% node_fontcolor: #00FF00
+% node_color: #00FF00
+% node_fillcolor: #222222
+
+% edge_color: red
+% edge_fontcolor: red
+% arrowhead: vee
+```
+
+<img src="./architecture.svg" alt="System Architecture" width="300"/>
+
+Configuration directives can appear anywhere in the file and will be extracted during processing.
 
 ## Testing
 
