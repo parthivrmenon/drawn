@@ -21,9 +21,6 @@ if __name__ == "__main__":
     c = Compiler(
         nodes,
         edges,
-        output_format="svg",
-        comment="Flow",
-        output_file="drawn_flow",
     )
     c.compile()
     c.render()

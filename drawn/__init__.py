@@ -70,33 +70,40 @@ class Compiler:
         self.output_file = output_file
 
     def _set_default_attributes(self):
-        self.dot.attr(dpi="150")
-        self.dot.attr(pad="0.2", nodesep="0.3", ranksep="0.4")
-        self.dot.attr(rankdir="LR", splines="ortho")
+
+        # Graph attributes
+        self.dot.attr(dpi="300")
+        self.dot.attr(bgcolor="transparent")
+        self.dot.attr(rankdir="TB", splines="ortho")
+        self.dot.attr(pad="0.2", nodesep="1", ranksep="0.8")
+
+        # Node attributes
         self.dot.node_attr["fontname"] = "Courier"
-        self.dot.node_attr["fontcolor"] = "black"
-        self.dot.node_attr["fontsize"] = "10"
-        self.dot.node_attr["fillcolor"] = "white"
-        self.dot.node_attr["penwidth"] = "0.5"
+        self.dot.node_attr["fontcolor"] = "white"
         self.dot.node_attr["shape"] = "box"
         self.dot.node_attr["style"] = "filled"
-        self.dot.node_attr["fillcolor"] = "#f5f5f5"
+        self.dot.node_attr["fillcolor"] = "transparent"
+        self.dot.node_attr["color"] = "white"
+        self.dot.node_attr["margin"] = "0.15,0.1"
+
+        # Edge attributes
+        self.dot.edge_attr["color"] = "black"
         self.dot.edge_attr["arrowhead"] = "normal"
-        self.dot.edge_attr["penwidth"] = "0.5"
-        self.dot.edge_attr["arrowsize"] = "0.5"
+        self.dot.edge_attr["penwidth"] = "0.8"
         self.dot.edge_attr["fontname"] = "Courier"
-        self.dot.edge_attr["fontsize"] = "8"
+        self.dot.edge_attr["color"] = "white"
+        self.dot.edge_attr["fontcolor"] = "white"
 
     def compile(self):
         for node in self.nodes:
             self.dot.node(node.name, label=node.label)
         for e in self.edges:
             if e.label:
-                self.dot.edge(e.src.name, e.dst.name, label=e.label)
+                self.dot.edge(e.src.name, e.dst.name, xlabel=e.label)
             else:
                 self.dot.edge(e.src.name, e.dst.name)
         return self.dot.source
 
     def render(self):
         self._set_default_attributes()
-        self.dot.render(self.output_file, view=False)
+        self.dot.render(self.output_file, view=False, cleanup=True)

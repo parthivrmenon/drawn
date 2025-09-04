@@ -7,9 +7,11 @@ from drawn import Compiler, Node, Edge, Parser
 def test_parser():
     nodes, edges = Parser(
         flows=[
-            "API -(auth)-> Server --> DB --> Logger",
-            "Server -(hit)-> Cache",
-            "Server --> Logger",
+            "Sun --> Evaporation",
+            "Evaporation -(condensation)-> Clouds",
+            "Clouds -(precipitation)-> Rain",
+            "Rain --> Oceans",
+            "Oceans -(evaporation)-> Clouds",
         ]
     ).parse()
     assert len(nodes) == 5
@@ -18,24 +20,33 @@ def test_parser():
 
 def test_compiler():
     nodes = [
-        Node("API", "API"),
-        Node("Server", "Server"),
-        Node("DB", "DB"),
+        Node("Sun", "Sun"),
+        Node("Evaporation", "Evaporation"),
+        Node("Clouds", "Clouds"),
+        Node("Rain", "Rain"),
+        Node("Oceans", "Oceans"),
     ]
     edges = [
-        Edge(nodes[0], nodes[1], "auth"),
-        Edge(nodes[1], nodes[2], None),
+        Edge(nodes[0], nodes[1]),
+        Edge(nodes[1], nodes[2], "condensation"),
+        Edge(nodes[2], nodes[3], "precipitation"),
+        Edge(nodes[3], nodes[4]),
+        Edge(nodes[4], nodes[2], "evaporation"),
     ]
     dot_src = Compiler(nodes, edges).compile()
     assert type(dot_src) == str
     lines = dot_src.splitlines()
     assert "// Flow" in lines[0]
     assert "digraph" in lines[1]
-    assert "API [label=API]" in lines[2]
-    assert "Server [label=Server]" in lines[3]
-    assert "DB [label=DB]" in lines[4]
-    assert "API -> Server [label=auth]" in lines[5]
-    assert "Server -> DB" in lines[6]
+    assert "\tSun [label=Sun]" in lines
+    assert "\tEvaporation [label=Evaporation]"
+    assert "\tClouds [label=Clouds]" in lines
+    assert "\tOceans [label=Oceans]" in lines
+    assert "\tSun -> Evaporation" in lines
+    assert "\tEvaporation -> Clouds [xlabel=condensation]" in lines
+    assert "\tClouds -> Rain [xlabel=precipitation]" in lines
+    assert "\tRain -> Oceans" in lines
+    assert "\tOceans -> Clouds [xlabel=evaporation]" in lines
 
 
 # from drawn.parser import parse, read_file

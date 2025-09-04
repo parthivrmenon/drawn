@@ -1,3 +1,6 @@
-API -(auth)-> Server --> DB
-Server -(hit)-> Cache
-Server --> Logger
+Sun --> Evaporation
+Evaporation -(condensation)-> Clouds
+Clouds -(precipitation)-> Rain
+Rain --> Rivers
+Rivers --> Oceans
+Oceans -(evaporation)-> Evaporation

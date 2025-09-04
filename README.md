@@ -2,6 +2,21 @@
 
 **Drawn** is a lightweight CLI tool for **diagrams-as-code** – helping architects and engineers design, version, and share system diagrams using simple text syntax.
 
+## Example
+
+From this simple code:
+```bash
+Sun --> Evaporation
+Evaporation -(condensation)-> Clouds
+Clouds -(precipitation)-> Rain
+Rain --> Rivers
+Rivers --> Oceans
+Oceans -(evaporation)-> Evaporation
+```
+To this diagram:
+
+<img src="./drawn_flow.svg" alt="Water Cycle Diagram" width="300"/>
+
 ## Features
 
 - **Simple arrow syntax** - `A --> B --> C`
@@ -42,7 +57,3 @@ python -m pytest tests/
 
 # Run tests with verbose output
 python -m pytest tests/ -v
-```
-
-
-
