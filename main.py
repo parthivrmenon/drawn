@@ -7,8 +7,9 @@ if __name__ == "__main__":
         sys.exit(1)
 
     # Read and parse the input file
-    flows = Reader(sys.argv[1]).flows
-    configs = Config(Reader(sys.argv[1]).configs)
+    reader = Reader(sys.argv[1])
+    flows = reader.flows
+    configs = Config(reader.configs)
     nodes, edges = Parser(flows).parse()
 
     # Compile and render the diagram

@@ -68,25 +68,23 @@ class Config:
         self.graph_pad = "0.2"
         self.graph_nodesep = "1"
         self.graph_ranksep = "0.8"
-        self.graph_bgcolor = "transparent"
 
         # Node attributes
-        self.node_fontcolor = "white"
-        self.node_color = "white"
         self.node_margin = "0.15,0.1"
         self.node_fontname = "Courier"
         self.node_fontsize = "12"
         self.node_shape = "box"
-        self.node_style = "filled"
-        self.node_fillcolor = "transparent"
 
         # Edge attributes
-        self.edge_color = "white"
-        self.edge_fontcolor = "white"
         self.edge_fontname = "Courier"
         self.edge_fontsize = "12"
         self.edge_arrowhead = "normal"
         self.edge_penwidth = "0.8"
+
+        # Theme
+        self.theme = "light"  # default theme
+        self.apply_theme()
+
 
         # override defaults if config strings are provided
         if config_strings:
@@ -102,6 +100,11 @@ class Config:
                     self.output_format = value
                 elif key == "comment":
                     self.comment = value
+
+                # Themes
+                elif key == "theme":
+                    self.theme = value
+                    self.apply_theme()
 
                 # Graph attributes
                 elif key == "graph_dpi":
@@ -122,8 +125,6 @@ class Config:
                 # Node attributes
                 elif key == "node_fontcolor":
                     self.node_fontcolor = value
-                elif key == "node_color":
-                    self.node_color = value
                 elif key == "node_shape":
                     self.node_shape = value
                 elif key == "node_margin":
@@ -154,7 +155,24 @@ class Config:
                 # Unsupported
                 else:
                     raise ValueError(f"Invalid config: {config}")
-
+            
+    def apply_theme(self):        
+        if self.theme == "dark":
+            self.graph_bgcolor = "black"
+            self.node_fillcolor = "black"
+            self.node_fontcolor = "white"
+            self.node_color = "white"
+            self.node_style = "filled"
+            self.edge_color = "white"
+            self.edge_fontcolor = "white"
+        else:  # default to light theme for any other value
+            self.graph_bgcolor = "white"
+            self.node_color = "black"
+            self.node_fillcolor = "white"
+            self.node_fontcolor = "black"
+            self.node_style = "filled"
+            self.edge_color = "black"
+            self.edge_fontcolor = "black"
 
 class Parser:
     """

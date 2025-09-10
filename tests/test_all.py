@@ -10,6 +10,7 @@ def test_reader():
     assert len(r.configs) == 24
 
 
+
 def test_default_config():
     default_config = Config()
     assert default_config.output_file == "flow"
@@ -17,7 +18,6 @@ def test_default_config():
     assert default_config.comment == "Flow"
 
     # Graph attributes
-    assert default_config.graph_bgcolor == "transparent"
     assert default_config.graph_dpi == "300"
     assert default_config.graph_rankdir == "TB"
     assert default_config.graph_splines == "ortho"
@@ -26,22 +26,49 @@ def test_default_config():
     assert default_config.graph_ranksep == "0.8"
 
     # Node attributes
-    assert default_config.node_fontcolor == "white"
-    assert default_config.node_color == "white"
+
     assert default_config.node_margin == "0.15,0.1"
     assert default_config.node_fontname == "Courier"
     assert default_config.node_fontsize == "12"
     assert default_config.node_shape == "box"
-    assert default_config.node_style == "filled"
-    assert default_config.node_fillcolor == "transparent"
 
     # Edge attributes
     assert default_config.edge_fontname == "Courier"
     assert default_config.edge_fontsize == "12"
     assert default_config.edge_arrowhead == "normal"
     assert default_config.edge_penwidth == "0.8"
-    assert default_config.edge_color == "white"
-    assert default_config.edge_fontcolor == "white"
+
+
+    # Theme related settings
+    assert default_config.theme == "light"
+
+    assert default_config.graph_bgcolor == "white"
+
+    assert default_config.node_color == "black"
+    assert default_config.node_fontcolor == "black"
+    assert default_config.node_fillcolor == "white"
+    assert default_config.node_style == "filled"
+
+    assert default_config.edge_color == "black"
+    assert default_config.edge_fontcolor == "black"
+
+
+def test_apply_theme():
+    dark_theme_config = Config(["% theme: dark"])
+    assert dark_theme_config.graph_bgcolor == "black"
+    assert dark_theme_config.node_fontcolor == "white"
+    assert dark_theme_config.node_fillcolor == "black"
+    assert dark_theme_config.node_color == "white"
+    assert dark_theme_config.edge_color == "white"
+    assert dark_theme_config.edge_fontcolor == "white"
+
+    light_theme_config = Config(["% theme: light"])
+    assert light_theme_config.graph_bgcolor == "white"
+    assert light_theme_config.node_color == "black"
+    assert light_theme_config.node_fillcolor == "white"
+    assert light_theme_config.node_fontcolor == "black"
+    assert light_theme_config.edge_color == "black"
+    assert light_theme_config.edge_fontcolor == "black"
 
 
 def test_custom_config():
@@ -60,7 +87,6 @@ def test_custom_config():
             "% graph_ranksep: 0.8",
             # Node attributes
             "% node_fontcolor: white",
-            "% node_color: white",
             "% node_fontname: Courier",
             "% node_fontsize: 12",
             "% node_shape: box",
@@ -74,6 +100,9 @@ def test_custom_config():
             "% edge_penwidth: 0.8",
             "% edge_color: white",
             "% edge_fontcolor: white",
+
+            # Themes
+            "% theme: dark"
         ]
     )
     assert custom_config.output_file == "flow"
@@ -81,7 +110,6 @@ def test_custom_config():
     assert custom_config.comment == "Flow"
 
     # Graph attributes
-    assert custom_config.graph_bgcolor == "white"
     assert custom_config.graph_dpi == "300"
     assert custom_config.graph_rankdir == "TB"
     assert custom_config.graph_splines == "ortho"
@@ -90,13 +118,10 @@ def test_custom_config():
     assert custom_config.graph_ranksep == "0.8"
 
     # Node attributes
-    assert custom_config.node_fontcolor == "white"
-    assert custom_config.node_color == "white"
     assert custom_config.node_fontname == "Courier"
     assert custom_config.node_fontsize == "12"
     assert custom_config.node_shape == "box"
     assert custom_config.node_style == "filled"
-    assert custom_config.node_fillcolor == "transparent"
     assert custom_config.node_margin == "0.15,0.1"
 
     # Edge attributes
@@ -106,6 +131,13 @@ def test_custom_config():
     assert custom_config.edge_fontsize == "12"
     assert custom_config.edge_arrowhead == "normal"
     assert custom_config.edge_penwidth == "0.8"
+
+    # Themes
+    assert custom_config.theme == "dark"
+    assert custom_config.graph_bgcolor == "black"
+    assert custom_config.node_fontcolor == "white"
+    assert custom_config.node_fillcolor == "black"
+    assert custom_config.node_color == "white"
 
 
 def test_parser():
