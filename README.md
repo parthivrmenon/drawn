@@ -13,9 +13,6 @@ Rain --> Rivers
 Rivers --> Oceans
 Oceans -(evaporation)-> Evaporation
 
-% output_format: svg
-% output_file: water_cycle
-% comment: Water Cycle Diagram
 ```
 To this diagram:
 
@@ -110,21 +107,58 @@ You can configure your diagrams using simple directives with a `%` prefix:
 % edge_penwidth: 0.8         # Edge line thickness (default: 0.8)
 ```
 
-### Examples
+### Diagram Types & Color Schemes
+
+Drawn uses a hybrid approach: **diagram types** control layout and structure, while **color schemes** control visual styling.
+
+```
+% type: architecture    # Layout optimized for system diagrams
+% colors: corporate     # Professional blue/gray palette
+```
+
+#### Examples
 <div align="center">
 <table>
   <tr>
-    <td><img src="./docs/architecture.svg" alt="System Architecture" width="300"/></td>
-    <td><img src="./docs/microservices.svg" alt="Microservices Architecture" width="300"/></td>
-    <td><img src="./docs/cicd_pipeline.svg" alt="CI/CD Pipeline" width="300"/></td>
+    <td align="center"><b>Architecture + Dark</b><br/>Enterprise system diagrams</td>
   </tr>
   <tr>
-    <td align="center"><b>System Architecture</b></td>
-    <td align="center"><b>Microservices Architecture</b></td>
-    <td align="center"><b>CI/CD Pipeline</b></td>
+    <td><img src="./docs/architecture.svg" alt="Architecture + Dark"/>
+    </td>
   </tr>
+
+  <br/>
+    <tr>
+    <td align="center"><b>Flow + Matrix</b><br/>Data processing pipelines</td>
+  </tr>
+  <tr>
+    <td><img src="./docs/flow.svg" alt="Flow + Matrix"/>
+    </td>
+  </tr>
+  <br/>
+
+  <tr>
+    <td align="center"><b>Presentation + Light</b><br/>Clean slide-ready diagrams</td>
+  </tr>
+  <tr>
+    <td><img src="./docs/presentation.svg" alt="Presentation + Light"/>
+    </td>
+  </tr>
+  <br/>
+
 </table>
 </div>
+
+**Diagram Types:**
+- `architecture` - Hierarchical, orthogonal lines, generous spacing
+- `flow` - Left-to-right, curved edges, elliptical nodes  
+- `presentation` - Large fonts, wide spacing, high visibility
+
+**Color Schemes:**
+- `light` - Black on white (default)
+- `dark` - White on black
+- `matrix` - Bright green terminal aesthetic
+- `corporate` - Professional blue/gray palette
 
 ## Testing
 

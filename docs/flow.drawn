@@ -1,0 +1,17 @@
+DataSource --> ETLPipeline
+ETLPipeline --> DataValidation
+DataValidation --> DataTransformation
+DataTransformation --> DataWarehouse
+DataTransformation --> DataLake
+DataWarehouse --> Analytics
+DataLake --> MachineLearning
+Analytics --> Dashboard
+MachineLearning --> Predictions
+Dashboard --> BusinessUsers
+Predictions --> BusinessUsers
+
+% type: flow
+% colors: matrix
+% output_file: flow
+% output_format: svg
+% comment: Data Processing Flow

@@ -74,6 +74,7 @@ class Config:
         self.node_fontname = "Courier"
         self.node_fontsize = "12"
         self.node_shape = "box"
+        self.node_style = "filled"
 
         # Edge attributes
         self.edge_fontname = "Courier"
@@ -81,9 +82,10 @@ class Config:
         self.edge_arrowhead = "normal"
         self.edge_penwidth = "0.8"
 
-        # Theme
-        self.theme = "light"  # default theme
-        self.apply_theme()
+        # Hybrid theme system
+        self.diagram_type = "default"    # Layout and structure
+        self.color_scheme = "light"      # Visual styling
+        self.apply_styling()
 
 
         # override defaults if config strings are provided
@@ -101,10 +103,14 @@ class Config:
                 elif key == "comment":
                     self.comment = value
 
-                # Themes
-                elif key == "theme":
-                    self.theme = value
-                    self.apply_theme()
+                # Hybrid theme system
+                elif key == "type":
+                    self.diagram_type = value
+                    self.apply_styling()
+                elif key == "colors":
+                    self.color_scheme = value
+                    self.apply_styling()
+                
 
                 # Graph attributes
                 elif key == "graph_dpi":
@@ -152,27 +158,119 @@ class Config:
                 elif key == "edge_penwidth":
                     self.edge_penwidth = value
 
+                # Graph attributes
+                elif key == "graph_bgcolor":
+                    self.graph_bgcolor = value
+
                 # Unsupported
                 else:
                     raise ValueError(f"Invalid config: {config}")
+    
+    def apply_styling(self):
+        """Apply diagram type (layout) and color scheme (colors) separately"""
+        self.apply_diagram_type()
+        self.apply_color_scheme()
+    
+    def apply_diagram_type(self):
+        """Apply layout and structural settings based on diagram type"""
+        if self.diagram_type == "architecture":
+            # Professional system architecture diagrams
+            self.graph_splines = "ortho"         # Clean right angles
+            self.graph_rankdir = "TB"            # Top-down hierarchy
+            self.graph_pad = "0.5"               # Generous padding
+            self.graph_nodesep = "1.5"           # Wide horizontal spacing
+            self.graph_ranksep = "1.2"           # Good vertical separation
             
-    def apply_theme(self):        
-        if self.theme == "dark":
+            # Professional node styling
+            self.node_fontname = "Helvetica"     # Clean, readable font
+            self.node_fontsize = "12"            # Standard readable size
+            self.node_shape = "box"              # Clean rectangles
+            self.node_style = "filled,rounded"   # Soft rounded corners
+            self.node_margin = "0.3,0.2"         # Generous padding
+            
+            # Clean edge styling
+            self.edge_fontname = "Helvetica"     # Consistent font
+            self.edge_fontsize = "10"            # Smaller edge labels
+            self.edge_arrowhead = "normal"       # Standard arrows
+            self.edge_penwidth = "1.0"           # Standard line weight
+            
+        elif self.diagram_type == "flow":
+            # Data flow and process diagrams
+            self.graph_splines = "curved"        # Smooth flow lines
+            self.graph_rankdir = "LR"            # Left-to-right flow
+            self.graph_pad = "0.4"               # Moderate padding
+            self.graph_nodesep = "1.2"           # Flow spacing
+            self.graph_ranksep = "1.0"           # Compact vertical
+            
+            # Flow-optimized nodes
+            self.node_fontname = "Helvetica"     # Clean font
+            self.node_fontsize = "11"            # Slightly smaller
+            self.node_shape = "ellipse"          # Flow-like shapes
+            self.node_style = "filled"           # Simple fill
+            self.node_margin = "0.2,0.15"        # Compact padding
+            
+            # Emphasized flow edges
+            self.edge_fontname = "Helvetica"     # Clean font
+            self.edge_fontsize = "9"             # Small labels
+            self.edge_arrowhead = "vee"          # Emphasize direction
+            self.edge_penwidth = "1.2"           # Thicker flow lines
+            
+        elif self.diagram_type == "presentation":
+            # Clean diagrams for slides and presentations
+            self.graph_splines = "ortho"         # Clean lines
+            self.graph_rankdir = "TB"            # Top-down
+            self.graph_pad = "0.6"               # Extra padding
+            self.graph_nodesep = "2.0"           # Wide spacing
+            self.graph_ranksep = "1.5"           # Generous vertical
+            
+            # Presentation-friendly nodes
+            self.node_fontname = "Helvetica"     # Highly readable
+            self.node_fontsize = "14"            # Larger for visibility
+            self.node_shape = "box"              # Simple shapes
+            self.node_style = "filled,rounded"   # Friendly rounded
+            self.node_margin = "0.4,0.3"         # Generous padding
+            
+            # Clear edges
+            self.edge_fontname = "Helvetica"     # Readable font
+            self.edge_fontsize = "11"            # Readable size
+            self.edge_arrowhead = "normal"       # Standard arrows
+            self.edge_penwidth = "1.5"           # Thick for visibility
+        # else: keep defaults for "default" type
+    
+    def apply_color_scheme(self):
+        """Apply color settings based on color scheme"""
+        if self.color_scheme == "dark":
             self.graph_bgcolor = "black"
             self.node_fillcolor = "black"
             self.node_fontcolor = "white"
             self.node_color = "white"
-            self.node_style = "filled"
             self.edge_color = "white"
             self.edge_fontcolor = "white"
-        else:  # default to light theme for any other value
+            
+        elif self.color_scheme == "matrix":
+            self.graph_bgcolor = "black"
+            self.node_fillcolor = "#001100"      # Very dark green
+            self.node_fontcolor = "#00FF00"      # Bright green text
+            self.node_color = "#00FF00"          # Bright green border
+            self.edge_color = "#00FF00"          # Bright green lines
+            self.edge_fontcolor = "#00FF00"      # Bright green edge text
+            
+        elif self.color_scheme == "corporate":
+            self.graph_bgcolor = "#f8f9fa"       # Very light gray
+            self.node_fillcolor = "white"        # Clean white fill
+            self.node_fontcolor = "#2c3e50"      # Dark blue-gray text
+            self.node_color = "#3498db"          # Professional blue border
+            self.edge_color = "#34495e"          # Dark gray lines
+            self.edge_fontcolor = "#34495e"      # Matching edge text
+            
+        else:  # light (default)
             self.graph_bgcolor = "white"
-            self.node_color = "black"
             self.node_fillcolor = "white"
             self.node_fontcolor = "black"
-            self.node_style = "filled"
+            self.node_color = "black"
             self.edge_color = "black"
             self.edge_fontcolor = "black"
+            
 
 class Parser:
     """

@@ -1,0 +1,17 @@
+Client --> LoadBalancer
+LoadBalancer -(distributes)-> WebTier
+WebTier -(calls)-> ApplicationTier
+ApplicationTier -(queries)-> DatabaseTier
+ApplicationTier -(caches)-> CacheLayer
+ApplicationTier -(publishes)-> MessageQueue
+MessageQueue -(triggers)-> BackgroundServices
+DatabaseTier -(replicates)-> PrimaryDB
+DatabaseTier -(syncs)-> SecondaryDB
+BackgroundServices -(integrates)-> ExternalAPI
+BackgroundServices -(stores)-> FileStorage
+
+% type: architecture
+% colors: dark
+% output_file: architecture
+% output_format: svg
+% comment: Enterprise System Architecture
