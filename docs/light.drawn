@@ -9,8 +9,7 @@ UserService --> UserDatabase
 PaymentService --> PaymentGateway
 PaymentGateway --> BankAPI
 
-% type: presentation
-% colors: light
-% output_file: presentation
+% theme: light
+% output_file: light
 % output_format: svg
-% comment: Mobile Payment System
+% comment: Light Theme Example

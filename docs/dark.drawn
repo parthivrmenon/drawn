@@ -10,8 +10,7 @@ DatabaseTier -(syncs)-> SecondaryDB
 BackgroundServices -(integrates)-> ExternalAPI
 BackgroundServices -(stores)-> FileStorage
 
-% type: architecture
-% colors: dark
-% output_file: architecture
+% theme: dark
+% output_file: dark
 % output_format: svg
-% comment: Enterprise System Architecture
+% comment: Dark Theme Example

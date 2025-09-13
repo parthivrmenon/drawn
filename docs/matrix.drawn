@@ -10,8 +10,7 @@ MachineLearning --> Predictions
 Dashboard --> BusinessUsers
 Predictions --> BusinessUsers
 
-% type: flow
-% colors: matrix
-% output_file: flow
+% theme: matrix
+% output_file: matrix
 % output_format: svg
-% comment: Data Processing Flow
+% comment: Matrix Theme Example

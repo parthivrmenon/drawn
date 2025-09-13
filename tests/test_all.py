@@ -7,7 +7,7 @@ from drawn import Compiler, Node, Edge, Parser, Reader, Config
 def test_reader():
     r = Reader("./tests/flow.drawn")
     assert len(r.flows) == 6
-    assert len(r.configs) == 6
+    assert len(r.configs) == 5
 
 
 
@@ -26,7 +26,6 @@ def test_default_config():
     assert default_config.graph_ranksep == "0.8"
 
     # Node attributes
-
     assert default_config.node_margin == "0.15,0.1"
     assert default_config.node_fontname == "Courier"
     assert default_config.node_fontsize == "12"
@@ -38,11 +37,8 @@ def test_default_config():
     assert default_config.edge_arrowhead == "normal"
     assert default_config.edge_penwidth == "0.8"
 
-
-    # Hybrid system defaults
-    assert default_config.diagram_type == "default"
-    assert default_config.color_scheme == "light"
-
+    # Theme defaults
+    assert default_config.theme == "light"
     assert default_config.graph_bgcolor == "white"
     assert default_config.node_color == "black"
     assert default_config.node_fontcolor == "black"
@@ -52,80 +48,31 @@ def test_default_config():
     assert default_config.edge_fontcolor == "black"
 
 
-def test_color_schemes():
-    dark_colors_config = Config(["% colors: dark"])
-    assert dark_colors_config.graph_bgcolor == "black"
-    assert dark_colors_config.node_fillcolor == "black"
-    assert dark_colors_config.node_fontcolor == "white"
-    assert dark_colors_config.node_color == "white"
-    assert dark_colors_config.edge_color == "white"
-    assert dark_colors_config.edge_fontcolor == "white"
 
-    light_colors_config = Config(["% colors: light"])
-    assert light_colors_config.graph_bgcolor == "white"
-    assert light_colors_config.node_color == "black"
-    assert light_colors_config.node_fillcolor == "white"
-    assert light_colors_config.node_fontcolor == "black"
-    assert light_colors_config.edge_color == "black"
-    assert light_colors_config.edge_fontcolor == "black"
+def test_themes():
+    dark_theme_config = Config(["% theme: dark"])
+    assert dark_theme_config.graph_bgcolor == "black"
+    assert dark_theme_config.node_fillcolor == "black"
+    assert dark_theme_config.node_fontcolor == "white"
+    assert dark_theme_config.node_color == "white"
+    assert dark_theme_config.edge_color == "white"
+    assert dark_theme_config.edge_fontcolor == "white"
 
-    matrix_colors_config = Config(["% colors: matrix"])
-    assert matrix_colors_config.graph_bgcolor == "black"
-    assert matrix_colors_config.node_fontcolor == "#00FF00"
-    assert matrix_colors_config.node_fillcolor == "#001100"
-    assert matrix_colors_config.node_color == "#00FF00"
-    assert matrix_colors_config.edge_color == "#00FF00"
-    assert matrix_colors_config.edge_fontcolor == "#00FF00"
+    light_theme_config = Config(["% theme: light"])
+    assert light_theme_config.graph_bgcolor == "white"
+    assert light_theme_config.node_color == "black"
+    assert light_theme_config.node_fillcolor == "white"
+    assert light_theme_config.node_fontcolor == "black"
+    assert light_theme_config.edge_color == "black"
+    assert light_theme_config.edge_fontcolor == "black"
 
-    corporate_colors_config = Config(["% colors: corporate"])
-    assert corporate_colors_config.graph_bgcolor == "#f8f9fa"
-    assert corporate_colors_config.node_fillcolor == "white"
-    assert corporate_colors_config.node_fontcolor == "#2c3e50"
-    assert corporate_colors_config.node_color == "#3498db"
-    assert corporate_colors_config.edge_color == "#34495e"
-    assert corporate_colors_config.edge_fontcolor == "#34495e"
-
-
-def test_diagram_types():
-    architecture_type_config = Config(["% type: architecture"])
-    assert architecture_type_config.graph_splines == "ortho"
-    assert architecture_type_config.graph_rankdir == "TB"
-    assert architecture_type_config.node_fontname == "Helvetica"
-    assert architecture_type_config.node_style == "filled,rounded"
-    assert architecture_type_config.edge_arrowhead == "normal"
-
-    flow_type_config = Config(["% type: flow"])
-    assert flow_type_config.graph_splines == "curved"
-    assert flow_type_config.graph_rankdir == "LR"
-    assert flow_type_config.node_shape == "ellipse"
-    assert flow_type_config.edge_arrowhead == "vee"
-
-    presentation_type_config = Config(["% type: presentation"])
-    assert presentation_type_config.node_fontsize == "14"
-    assert presentation_type_config.graph_nodesep == "2.0"
-    assert presentation_type_config.edge_penwidth == "1.5"
-
-
-def test_hybrid_system():
-    # Test diagram type + color scheme combination
-    hybrid_config = Config(["% type: flow", "% colors: matrix"])
-    
-    # Should have flow layout characteristics
-    assert hybrid_config.graph_splines == "curved"
-    assert hybrid_config.graph_rankdir == "LR"
-    assert hybrid_config.node_shape == "ellipse"
-    assert hybrid_config.edge_arrowhead == "vee"
-    
-    # Should have matrix color scheme
-    assert hybrid_config.graph_bgcolor == "black"
-    assert hybrid_config.node_fontcolor == "#00FF00"
-    assert hybrid_config.edge_color == "#00FF00"
-
-    # Test presentation type with corporate colors
-    presentation_config = Config(["% type: presentation", "% colors: corporate"])
-    assert presentation_config.node_fontsize == "14"  # Large for presentation
-    assert presentation_config.graph_nodesep == "2.0"  # Wide spacing
-    assert presentation_config.node_color == "#3498db"  # Corporate blue
+    matrix_theme_config = Config(["% theme: matrix"])
+    assert matrix_theme_config.graph_bgcolor == "black"
+    assert matrix_theme_config.node_fontcolor == "#00FF00"
+    assert matrix_theme_config.node_fillcolor == "#001100"
+    assert matrix_theme_config.node_color == "#00FF00"
+    assert matrix_theme_config.edge_color == "#00FF00"
+    assert matrix_theme_config.edge_fontcolor == "#00FF00"
 
 
 def test_custom_config():
@@ -158,8 +105,8 @@ def test_custom_config():
             "% edge_color: white",
             "% edge_fontcolor: white",
 
-            # Use hybrid system
-            "% colors: dark"
+            # Use dark theme
+            "% theme: dark"
         ]
     )
     assert custom_config.output_file == "flow"
@@ -190,7 +137,7 @@ def test_custom_config():
     assert custom_config.edge_penwidth == "0.8"
 
     # Colors should be applied
-    assert custom_config.color_scheme == "dark"
+    assert custom_config.theme == "dark"
     assert custom_config.graph_bgcolor == "black"
     assert custom_config.node_fontcolor == "white"
     assert custom_config.node_fillcolor == "black"

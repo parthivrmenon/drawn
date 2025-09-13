@@ -107,58 +107,36 @@ You can configure your diagrams using simple directives with a `%` prefix:
 % edge_penwidth: 0.8         # Edge line thickness (default: 0.8)
 ```
 
-### Diagram Types & Color Schemes
+### Themes
 
-Drawn uses a hybrid approach: **diagram types** control layout and structure, while **color schemes** control visual styling.
+Drawn supports three built-in themes that control the visual styling of your diagrams:
 
 ```
-% type: architecture    # Layout optimized for system diagrams
-% colors: corporate     # Professional blue/gray palette
+% theme: light    # Black on white (default)
+% theme: dark     # White on black  
+% theme: matrix   # Bright green terminal aesthetic
 ```
 
 #### Examples
 <div align="center">
 <table>
   <tr>
-    <td align="center"><b>Architecture + Dark</b><br/>Enterprise system diagrams</td>
+    <td align="center"><b>Light Theme</b><br/>Clean, professional diagrams</td>
+    <td align="center"><b>Dark Theme</b><br/>High contrast on dark background</td>
+    <td align="center"><b>Matrix Theme</b><br/>Terminal-style hacker aesthetic</td>
   </tr>
   <tr>
-    <td><img src="./docs/architecture.svg" alt="Architecture + Dark"/>
-    </td>
+    <td><img src="./docs/light.svg" alt="Light Theme"/></td>
+    <td><img src="./docs/dark.svg" alt="Dark Theme"/></td>
+    <td><img src="./docs/matrix.svg" alt="Matrix Theme"/></td>
   </tr>
-
-  <br/>
-    <tr>
-    <td align="center"><b>Flow + Matrix</b><br/>Data processing pipelines</td>
-  </tr>
-  <tr>
-    <td><img src="./docs/flow.svg" alt="Flow + Matrix"/>
-    </td>
-  </tr>
-  <br/>
-
-  <tr>
-    <td align="center"><b>Presentation + Light</b><br/>Clean slide-ready diagrams</td>
-  </tr>
-  <tr>
-    <td><img src="./docs/presentation.svg" alt="Presentation + Light"/>
-    </td>
-  </tr>
-  <br/>
-
 </table>
 </div>
 
-**Diagram Types:**
-- `architecture` - Hierarchical, orthogonal lines, generous spacing
-- `flow` - Left-to-right, curved edges, elliptical nodes  
-- `presentation` - Large fonts, wide spacing, high visibility
-
-**Color Schemes:**
-- `light` - Black on white (default)
-- `dark` - White on black
-- `matrix` - Bright green terminal aesthetic
-- `corporate` - Professional blue/gray palette
+**Available Themes:**
+- `light` - Black text on white background (default)
+- `dark` - White text on black background
+- `matrix` - Bright green text on black background with terminal styling
 
 ## Testing
 
