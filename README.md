@@ -1,6 +1,6 @@
 # Drawn
 
-**Drawn** is a lightweight CLI tool for **diagrams-as-code** – helping architects and engineers design, version, and share system diagrams using simple text syntax.
+**Drawn** is a really **minimalistic** and **lightweight** CLI tool for **diagrams-as-code** – It helps users generate beautiful system diagrams using a super simple notation.
 
 ## Example
 
@@ -18,6 +18,14 @@ To this diagram:
 
 <img src="./docs/water_cycle.svg" alt="Water Cycle Diagram" width="300"/>
 
+## Table of Contents:
+- [Features](#features)
+- [Philosophy](#philosophy)
+- [Quick Start](#quick-start)
+- [Configuration](#configuration)
+- [Testing](#testing)
+- [Advanced Configuration](#advanced-configuration)
+
 ## Features
 
 - **Simple arrow syntax** - `A --> B --> C`
@@ -33,30 +41,67 @@ To this diagram:
 - **Simple over complex** - Minimal syntax that anyone can learn
 - **Fast feedback** - From idea to diagram in 30 seconds
 - **Git-friendly** - Text-based diagrams that version well
-- **Local-first** - No internet required, no complex setup
-- **Self-contained** - All diagram information in a single file
+- **Opinionated** - Simple and consistent styling
+- **Advanced configuration** - Customise every aspect of the diagram if required.
+
 
 ## Quick Start
 
 ### Installation
+
+#### Prerequisites
+Drawn requires [Graphviz](https://graphviz.org/download/) to be installed on your system:
+
+```bash
+# macOS
+brew install graphviz
+
+# Ubuntu/Debian
+sudo apt-get install graphviz
+
+# Windows
+# Download and install from: https://graphviz.org/download/
+```
+
+#### Install from PyPI (Recommended)
+```bash
+# Install the latest stable version
+pip install drawn
+
+# Create your first diagram
+echo "API --> Server --> DB" > flow.drawn
+drawn flow.drawn
+```
+
+#### Install from Source
 ```bash
 # Clone the repo
 git clone git@github.com:parthivrmenon/drawn.git
 cd drawn
 
-# Install dependencies
-pip install graphviz
+# Install the package
+pip install .
+```
 
-# Create your first diagram
-echo "API --> Server --> DB" > flow.drawn
-python main.py flow.drawn
+#### Development Installation
+```bash
+# Clone the repo for development
+git clone git@github.com:parthivrmenon/drawn.git
+cd drawn
+
+# Install dependencies (optional, for full package install)
+pip install -e .
+
+# Or run directly without installation
+python drawn/cli.py flow.drawn
 ```
 
 ### Usage
 
 ```bash
 # Basic usage
-python main.py flow.drawn
+echo "API --> Server --> DB" > flow.drawn
+drawn flow.drawn
 ```
 
 ## Configuration
@@ -70,6 +115,50 @@ You can configure your diagrams using simple directives with a `%` prefix:
 % output_format: svg|png|pdf # Output format (default: svg)
 % comment: My Diagram        # Title for the diagram (default: Flow)
 ```
+
+For advanced configuration options, see [Advanced Configuration](#advanced-configuration).
+
+### Themes
+
+Drawn supports three built-in themes that control the visual styling of your diagrams:
+
+```
+% theme: light    # Black on white (default)
+% theme: dark     # White on black  
+% theme: matrix   # Bright green terminal aesthetic
+```
+
+#### Examples
+<div align="center">
+<table>
+  <tr>
+    <td align="center"><b>Light Theme</b><br/>Clean, professional diagrams</td>
+    <td align="center"><b>Dark Theme</b><br/>High contrast on dark background</td>
+    <td align="center"><b>Matrix Theme</b><br/>Terminal-style hacker aesthetic</td>
+  </tr>
+  <tr>
+    <td><img src="./docs/light.svg" alt="Light Theme"/></td>
+    <td><img src="./docs/dark.svg" alt="Dark Theme"/></td>
+    <td><img src="./docs/matrix.svg" alt="Matrix Theme"/></td>
+  </tr>
+</table>
+</div>
+
+**Available Themes:**
+- `light` - Black text on white background (default)
+- `dark` - White text on black background
+- `matrix` - Bright green text on black background with terminal styling
+
+## Testing
+
+{{ ... }}
+# Run all tests
+python -m pytest tests/
+
+# Run tests with verbose output
+python -m pytest tests/ -v
+
+## Advanced Configuration
 
 ### Graph Attributes
 
@@ -124,43 +213,3 @@ Drawn automatically selects appropriate node shapes based on node names to impro
 - **Components** (`api`, `service`, `server`) → `component`
 - **Users** (`user`, `customer`) → `ellipse`
 - **Default** (all others) → `box`
-
-### Themes
-
-Drawn supports three built-in themes that control the visual styling of your diagrams:
-
-```
-% theme: light    # Black on white (default)
-% theme: dark     # White on black  
-% theme: matrix   # Bright green terminal aesthetic
-```
-
-#### Examples
-<div align="center">
-<table>
-  <tr>
-    <td align="center"><b>Light Theme</b><br/>Clean, professional diagrams</td>
-    <td align="center"><b>Dark Theme</b><br/>High contrast on dark background</td>
-    <td align="center"><b>Matrix Theme</b><br/>Terminal-style hacker aesthetic</td>
-  </tr>
-  <tr>
-    <td><img src="./docs/light.svg" alt="Light Theme"/></td>
-    <td><img src="./docs/dark.svg" alt="Dark Theme"/></td>
-    <td><img src="./docs/matrix.svg" alt="Matrix Theme"/></td>
-  </tr>
-</table>
-</div>
-
-**Available Themes:**
-- `light` - Black text on white background (default)
-- `dark` - White text on black background
-- `matrix` - Bright green text on black background with terminal styling
-
-## Testing
-
-```bash
-# Run all tests
-python -m pytest tests/
-
-# Run tests with verbose output
-python -m pytest tests/ -v
