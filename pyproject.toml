@@ -5,14 +5,43 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "drawn"
 version = "0.1.0"
-description = "A minimal .drawn -> Graphviz diagram generator"
+description = "A minimalistic CLI tool for diagrams-as-code"
+readme = "README.md"
+license = {text = "MIT"}
 authors = [
-    {name="Parth Ivr Menon", email="parthivrmenon@gmail.com"}
+    {name = "Parth Ivr Menon", email = "parthivrmenon@gmail.com"}
+]
+maintainers = [
+    {name = "Parth Ivr Menon", email = "parthivrmenon@gmail.com"}
+]
+keywords = ["diagrams", "graphviz", "cli", "visualization", "architecture"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Utilities",
 ]
 dependencies = [
     "graphviz",
 ]
 requires-python = ">=3.8"
+
+[project.urls]
+Homepage = "https://github.com/parthivrmenon/drawn"
+Repository = "https://github.com/parthivrmenon/drawn"
+Issues = "https://github.com/parthivrmenon/drawn/issues"
+Documentation = "https://github.com/parthivrmenon/drawn#readme"
 
 [project.scripts]
 drawn = "drawn.cli:main"
