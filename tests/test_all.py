@@ -1,7 +1,11 @@
 import pytest
 import os
 import json
-from drawn import Compiler, Node, Edge, Parser, Reader, Config
+from drawn.compiler import Compiler
+from drawn.models import Node, Edge
+from drawn.parser import Parser
+from drawn.reader import Reader
+from drawn.config import Config
 
 
 def test_reader():
