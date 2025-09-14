@@ -1,5 +1,8 @@
 import sys
-from drawn import Parser, Compiler, Reader, Config
+from drawn.compiler import Compiler
+from drawn.parser import Parser
+from drawn.reader import Reader
+from drawn.config import Config
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:

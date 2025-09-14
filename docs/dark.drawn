@@ -1,0 +1,16 @@
+User --> LoadBalancer
+LoadBalancer -(distributes)-> APIServer
+APIServer -(calls)-> AuthService
+APIServer -(queries)-> MySQLDatabase
+APIServer -(caches)-> RedisCache
+APIServer -(publishes)-> RabbitMQQueue
+RabbitMQQueue -(triggers)-> BackgroundService
+MySQLDatabase -(replicates)-> PostgresDB
+RedisCache -(syncs)-> MemcachedCache
+BackgroundService -(integrates)-> ExternalAPI
+BackgroundService -(stores)-> S3Storage
+
+% theme: dark
+% output_file: dark
+% output_format: svg
+% comment: Dark Theme Example

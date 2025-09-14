@@ -1,0 +1,16 @@
+S3Bucket --> KafkaQueue
+KafkaQueue --> ETLService
+ETLService --> DataValidation
+DataValidation --> PostgresDB
+DataValidation --> RedisCache
+PostgresDB --> AnalyticsAPI
+RedisCache --> AnalyticsAPI
+AnalyticsAPI --> Dashboard
+Dashboard --> DataScientist
+AnalyticsAPI --> MLService
+MLService --> Customer
+
+% theme: matrix
+% output_file: matrix
+% output_format: svg
+% comment: Matrix Theme Example
