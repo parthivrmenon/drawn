@@ -131,17 +131,17 @@ Drawn supports three built-in themes that control the visual styling of your dia
 #### Examples
 <summary>Clean and simple on white background</summary>
 <br/>
-<img src="./docs/light.svg" alt="Light Theme"/>
+<img src="./docs/light.svg" alt="Light Theme" width="300"/>
 <br/>
 
 <summary>High contrast on dark background</summary>
 <br/>
-<img src="./docs/dark.svg" alt="Dark Theme"/>
+<img src="./docs/dark.svg" alt="Dark Theme" width="300"/>
 <br/>
 
 <summary>Terminal-style hacker aesthetic</summary>
 <br/>
-<img src="./docs/matrix.svg" alt="Matrix Theme"/>
+<img src="./docs/matrix.svg" alt="Matrix Theme" width="300"/>
 <br/>
 
 **Available Themes:**
