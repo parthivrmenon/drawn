@@ -3,16 +3,16 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "drawn"
+name = "drawn-cli"
 version = "0.1.0"
 description = "A minimalistic CLI tool for diagrams-as-code"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Parth Ivr Menon", email = "parthivrmenon@gmail.com"}
+    {name = "Parthiv R Menon", email = "parthivrmenon@gmail.com"}
 ]
 maintainers = [
-    {name = "Parth Ivr Menon", email = "parthivrmenon@gmail.com"}
+    {name = "Parthiv R Menon", email = "parthivrmenon@gmail.com"}
 ]
 keywords = ["diagrams", "graphviz", "cli", "visualization", "architecture"]
 classifiers = [

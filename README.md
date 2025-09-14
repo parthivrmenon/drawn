@@ -66,7 +66,7 @@ sudo apt-get install graphviz
 #### Install from PyPI (Recommended)
 ```bash
 # Install the latest stable version
-pip install drawn
+pip install drawn-cli
 
 # Create your first diagram
 echo "API --> Server --> DB" > flow.drawn
