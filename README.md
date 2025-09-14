@@ -107,6 +107,24 @@ You can configure your diagrams using simple directives with a `%` prefix:
 % edge_penwidth: 0.8         # Edge line thickness (default: 0.8)
 ```
 
+### Auto-Shapes
+
+Drawn automatically selects appropriate node shapes based on node names to improve diagram readability:
+
+```
+% auto_shapes: true     # Enable automatic shape selection (default: true)
+% auto_shapes: false    # Disable automatic shape selection
+```
+
+**Shape Mappings:**
+- **Databases** (`db`, `database`, `sql`, `postgres`, `mysql`) → `cylinder`
+- **Caches** (`cache`, `redis`, `memcached`) → `box3d`
+- **Queues** (`queue`, `kafka`, `rabbitmq`) → `parallelogram`
+- **Storage** (`storage`, `bucket`, `s3`) → `folder`
+- **Components** (`api`, `service`, `server`) → `component`
+- **Users** (`user`, `customer`) → `ellipse`
+- **Default** (all others) → `box`
+
 ### Themes
 
 Drawn supports three built-in themes that control the visual styling of your diagrams:

@@ -2,6 +2,7 @@ from typing import Optional
 from graphviz import Digraph
 from .models import Node, Edge
 from .config import Config
+from .shapes import get_auto_shape_for_node
 
 
 class Compiler:
@@ -53,7 +54,11 @@ class Compiler:
 
     def compile(self):
         for node in self.nodes:
-            self.dot.node(node.name, label=node.label)
+            if self.config.auto_shapes:
+                node_shape = get_auto_shape_for_node(node.name)
+                self.dot.node(node.name, label=node.label, shape=node_shape)
+            else:
+                self.dot.node(node.name, label=node.label)
         for e in self.edges:
             if e.label:
                 self.dot.edge(e.src.name, e.dst.name, xlabel=e.label)

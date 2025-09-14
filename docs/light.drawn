@@ -1,13 +1,14 @@
 User --> MobileApp
 User --> WebApp
-MobileApp --> APIGateway
-WebApp --> APIGateway
-APIGateway --> AuthService
-APIGateway --> UserService
-APIGateway --> PaymentService
-UserService --> UserDatabase
-PaymentService --> PaymentGateway
-PaymentGateway --> BankAPI
+MobileApp --> APIServer
+WebApp --> APIServer
+APIServer --> AuthService
+APIServer --> UserService
+APIServer --> PaymentService
+UserService --> PostgresDB
+PaymentService --> RedisCache
+RedisCache --> PaymentQueue
+PaymentQueue --> BankAPI
 
 % theme: light
 % output_file: light

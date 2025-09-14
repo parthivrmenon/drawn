@@ -37,6 +37,9 @@ class Config:
         self.theme = "light"
         self.apply_theme()
 
+        # Auto-shapes
+        self.auto_shapes = True
+
         # override defaults if config strings are provided
         if config_strings:
             for config_string in config_strings:
@@ -56,6 +59,10 @@ class Config:
                 elif key == "theme":
                     self.theme = value
                     self.apply_theme()
+
+                # Auto-shapes
+                elif key == "auto_shapes":
+                    self.auto_shapes = value.lower() in ("true", "yes", "1", "on")
 
                 # Graph attributes
                 elif key == "graph_dpi":

@@ -1,14 +1,14 @@
-Client --> LoadBalancer
-LoadBalancer -(distributes)-> WebTier
-WebTier -(calls)-> ApplicationTier
-ApplicationTier -(queries)-> DatabaseTier
-ApplicationTier -(caches)-> CacheLayer
-ApplicationTier -(publishes)-> MessageQueue
-MessageQueue -(triggers)-> BackgroundServices
-DatabaseTier -(replicates)-> PrimaryDB
-DatabaseTier -(syncs)-> SecondaryDB
-BackgroundServices -(integrates)-> ExternalAPI
-BackgroundServices -(stores)-> FileStorage
+User --> LoadBalancer
+LoadBalancer -(distributes)-> APIServer
+APIServer -(calls)-> AuthService
+APIServer -(queries)-> MySQLDatabase
+APIServer -(caches)-> RedisCache
+APIServer -(publishes)-> RabbitMQQueue
+RabbitMQQueue -(triggers)-> BackgroundService
+MySQLDatabase -(replicates)-> PostgresDB
+RedisCache -(syncs)-> MemcachedCache
+BackgroundService -(integrates)-> ExternalAPI
+BackgroundService -(stores)-> S3Storage
 
 % theme: dark
 % output_file: dark
