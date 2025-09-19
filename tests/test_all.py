@@ -14,7 +14,7 @@ from drawn.shapes import get_auto_shape_for_node
 def test_reader():
     r = Reader("./tests/flow.drawn")
     assert len(r.flows) == 6
-    assert len(r.configs) == 5
+    assert len(r.configs) == 4
 
 
 def test_default_config():
