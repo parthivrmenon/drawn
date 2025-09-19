@@ -16,7 +16,7 @@ maintainers = [
 ]
 keywords = ["diagrams", "graphviz", "cli", "visualization", "architecture"]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 3 - Alpha",
     "Environment :: Console",
     "Intended Audience :: Developers",
     "Intended Audience :: System Administrators",
@@ -37,11 +37,16 @@ dependencies = [
 ]
 requires-python = ">=3.8"
 
+[project.optional-dependencies]
+dev = ["pytest", "black", "ruff"]
+docs = ["mkdocs", "mkdocs-material"]
+
 [project.urls]
 Homepage = "https://github.com/parthivrmenon/drawn"
 Repository = "https://github.com/parthivrmenon/drawn"
 Issues = "https://github.com/parthivrmenon/drawn/issues"
 Documentation = "https://github.com/parthivrmenon/drawn#readme"
+Changelog = "https://github.com/parthivrmenon/drawn/releases"
 
 [project.scripts]
 drawn = "drawn.cli:main"
