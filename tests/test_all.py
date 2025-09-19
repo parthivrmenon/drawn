@@ -1,11 +1,13 @@
-import pytest
-import os
 import json
+import os
+
+import pytest
+
 from drawn.compiler import Compiler
-from drawn.models import Node, Edge
+from drawn.config import Config
+from drawn.models import Edge, Node
 from drawn.parser import Parser
 from drawn.reader import Reader
-from drawn.config import Config
 from drawn.shapes import get_auto_shape_for_node
 
 
@@ -13,7 +15,6 @@ def test_reader():
     r = Reader("./tests/flow.drawn")
     assert len(r.flows) == 6
     assert len(r.configs) == 5
-
 
 
 def test_default_config():
@@ -51,7 +52,6 @@ def test_default_config():
     assert default_config.node_style == "filled"
     assert default_config.edge_color == "black"
     assert default_config.edge_fontcolor == "black"
-
 
 
 def test_themes():
@@ -109,9 +109,8 @@ def test_custom_config():
             "% edge_penwidth: 0.8",
             "% edge_color: white",
             "% edge_fontcolor: white",
-
             # Use dark theme
-            "% theme: dark"
+            "% theme: dark",
         ]
     )
     assert custom_config.output_file == "flow"
@@ -194,6 +193,7 @@ def test_compiler():
     assert "\tRain -> Oceans" in lines
     assert "\tOceans -> Clouds [xlabel=evaporation]" in lines
 
+
 def test_get_auto_shape_for_node():
     # Databases
     assert get_auto_shape_for_node("db") == "cylinder"
@@ -245,7 +245,6 @@ def test_get_auto_shape_for_node():
     assert get_auto_shape_for_node("service") == "component"
     assert get_auto_shape_for_node("SERVICE") == "component"
 
-
     # Users
     assert get_auto_shape_for_node("user") == "ellipse"
     assert get_auto_shape_for_node("USER") == "ellipse"
@@ -257,31 +256,31 @@ def test_auto_shapes_config():
     # Test auto_shapes enabled (default)
     config_enabled = Config()
     assert config_enabled.auto_shapes == True
-    
+
     # Test auto_shapes disabled via config
     config_disabled = Config(["% auto_shapes: false"])
     assert config_disabled.auto_shapes == False
-    
+
     # Test various ways to disable
     config_no = Config(["% auto_shapes: no"])
     assert config_no.auto_shapes == False
-    
+
     config_off = Config(["% auto_shapes: off"])
     assert config_off.auto_shapes == False
-    
+
     config_0 = Config(["% auto_shapes: 0"])
     assert config_0.auto_shapes == False
-    
+
     # Test various ways to enable
     config_true = Config(["% auto_shapes: true"])
     assert config_true.auto_shapes == True
-    
+
     config_yes = Config(["% auto_shapes: yes"])
     assert config_yes.auto_shapes == True
-    
+
     config_1 = Config(["% auto_shapes: 1"])
     assert config_1.auto_shapes == True
-    
+
     config_on = Config(["% auto_shapes: on"])
     assert config_on.auto_shapes == True
 
@@ -294,16 +293,16 @@ def test_compiler_auto_shapes_disabled():
         Node("RedisCache", "RedisCache"),
     ]
     edges = []
-    
+
     config = Config(["% auto_shapes: false"])
     dot_src = Compiler(nodes, edges, config).compile()
     lines = dot_src.splitlines()
-    
+
     # Should not have shape attributes when auto_shapes is disabled
     assert "\tUserDB [label=UserDB]" in lines
-    assert "\tAPIServer [label=APIServer]" in lines  
+    assert "\tAPIServer [label=APIServer]" in lines
     assert "\tRedisCache [label=RedisCache]" in lines
-    
+
     # Verify no shape attributes are present
     for line in lines:
         if "label=" in line and "[" in line:
@@ -318,14 +317,12 @@ def test_compiler_auto_shapes_enabled():
         Node("RedisCache", "RedisCache"),
     ]
     edges = []
-    
+
     config = Config(["% auto_shapes: true"])
     dot_src = Compiler(nodes, edges, config).compile()
     lines = dot_src.splitlines()
-    
+
     # Should have shape attributes when auto_shapes is enabled
     assert "\tUserDB [label=UserDB shape=cylinder]" in lines
     assert "\tAPIServer [label=APIServer shape=component]" in lines
     assert "\tRedisCache [label=RedisCache shape=box3d]" in lines
-
-    

@@ -113,7 +113,7 @@ class Config:
                 # Unsupported
                 else:
                     raise ValueError(f"Invalid config: {config}")
-    
+
     def apply_theme(self):
         """Apply theme settings"""
         if self.theme == "dark":
@@ -123,15 +123,15 @@ class Config:
             self.node_color = "white"
             self.edge_color = "white"
             self.edge_fontcolor = "white"
-            
+
         elif self.theme == "matrix":
             self.graph_bgcolor = "black"
-            self.node_fillcolor = "#001100"      # Very dark green
-            self.node_fontcolor = "#00FF00"      # Bright green text
-            self.node_color = "#00FF00"          # Bright green border
-            self.edge_color = "#00FF00"          # Bright green lines
-            self.edge_fontcolor = "#00FF00"      # Bright green edge text
-            
+            self.node_fillcolor = "#001100"  # Very dark green
+            self.node_fontcolor = "#00FF00"  # Bright green text
+            self.node_color = "#00FF00"  # Bright green border
+            self.edge_color = "#00FF00"  # Bright green lines
+            self.edge_fontcolor = "#00FF00"  # Bright green edge text
+
         else:  # light (default)
             self.graph_bgcolor = "white"
             self.node_fillcolor = "white"

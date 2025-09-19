@@ -1,4 +1,4 @@
-from .models import Node, Edge
+from .models import Edge, Node
 
 
 class Parser:

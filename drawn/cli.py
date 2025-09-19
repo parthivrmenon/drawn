@@ -1,8 +1,10 @@
 import sys
-from drawn.reader import Reader
-from drawn.parser import Parser
-from drawn.config import Config
+
 from drawn.compiler import Compiler
+from drawn.config import Config
+from drawn.parser import Parser
+from drawn.reader import Reader
+
 
 def main():
     if len(sys.argv) < 2:
@@ -18,6 +20,6 @@ def main():
     compiler = Compiler(nodes, edges, config=config)
     compiler.render()
 
+
 if __name__ == "__main__":
     main()
-    

@@ -1,7 +1,9 @@
 from typing import Optional
+
 from graphviz import Digraph
-from .models import Node, Edge
+
 from .config import Config
+from .models import Edge, Node
 from .shapes import get_auto_shape_for_node
 
 
@@ -24,7 +26,6 @@ class Compiler:
         self.dot = Digraph(comment=config.comment, format=config.output_format)
 
     def _set_default_attributes(self):
-
         # Graph attributes
         self.dot.attr(dpi=self.config.graph_dpi)
         self.dot.attr(bgcolor=self.config.graph_bgcolor)

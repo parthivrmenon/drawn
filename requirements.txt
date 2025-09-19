@@ -1,0 +1,15 @@
+cfgv==3.4.0
+distlib==0.4.0
+filelock==3.19.1
+graphviz==0.21
+identify==2.6.14
+iniconfig==2.1.0
+nodeenv==1.9.1
+packaging==25.0
+platformdirs==4.4.0
+pluggy==1.6.0
+pre_commit==4.3.0
+Pygments==2.19.2
+pytest==8.4.2
+PyYAML==6.0.2
+virtualenv==20.34.0

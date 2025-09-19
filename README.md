@@ -18,7 +18,7 @@ To this diagram:
 
 <img src="./docs/water_cycle.svg" alt="Water Cycle Diagram" width="300"/>
 
-## What's Inside? 📖
+## What's Inside? 
 - [Features](#features)
 - [Philosophy](#philosophy)
 - [Quick Start](#quick-start)
@@ -26,7 +26,7 @@ To this diagram:
 - [Testing](#testing)
 - [Advanced Configuration](#advanced-configuration)
 
-## Features 🎯
+## Features 
 
 - **Simple arrow syntax** - `A --> B --> C`
 - **Multi-line support** - Handle complex flows
@@ -36,7 +36,7 @@ To this diagram:
 - **Test coverage** - Reliable and maintainable
 - **Inline configuration** - Simple directives using % prefix
 
-## Philosophy 🧘‍♂️
+## Philosophy 
 
 - **Simple over complex** - Minimal syntax that anyone can learn
 - **Fast feedback** - From idea to diagram in 30 seconds
@@ -45,7 +45,7 @@ To this diagram:
 - **Advanced configuration** - Customise every aspect of the diagram if required.
 
 
-## Quick Start 🏃‍♂️
+## Quick Start 
 
 ### Installation
 
@@ -63,7 +63,7 @@ sudo apt-get install graphviz
 # Download and install from: https://graphviz.org/download/
 ```
 
-#### Install from PyPI (Recommended) 🎉
+#### Install from PyPI (Recommended) 
 ```bash
 # Install the latest stable version
 pip install drawn-cli
@@ -73,7 +73,7 @@ echo "API --> Server --> DB" > flow.drawn
 drawn flow.drawn
 ```
 
-#### Install from Source 🛠️
+#### Install from Source 
 ```bash
 # Clone the repo
 git clone git@github.com:parthivrmenon/drawn.git
@@ -83,7 +83,7 @@ cd drawn
 pip install .
 ```
 
-#### Development Installation 👩‍💻
+#### Development Installation 
 ```bash
 # Clone the repo for development
 git clone git@github.com:parthivrmenon/drawn.git
@@ -93,10 +93,10 @@ cd drawn
 pip install -e .
 
 # Or run directly without installation
-python drawn/cli.py flow.drawn
+python -m drawn.cli <file_path>
 ```
 
-### Usage 🎮
+### Usage 
 
 ```bash
 # Basic usage
@@ -104,11 +104,11 @@ echo "API --> Server --> DB" > flow.drawn
 drawn flow.drawn
 ```
 
-## Configuration 🎛️
+## Configuration 
 
 You can configure your diagrams using simple directives with a `%` prefix:
 
-### Basic Configuration 🎯
+### Basic Configuration 
 
 ```
 % output_file: filename      # Output filename (default: flow)
@@ -118,7 +118,7 @@ You can configure your diagrams using simple directives with a `%` prefix:
 
 For advanced configuration options, see [Advanced Configuration](#advanced-configuration).
 
-### Themes 🎨
+### Themes 
 
 Drawn supports three built-in themes that control the visual styling of your diagrams:
 
@@ -149,7 +149,7 @@ Drawn supports three built-in themes that control the visual styling of your dia
 - `dark` - White text on black background
 - `matrix` - Bright green text on black background with terminal styling
 
-## Testing 🧪
+## Testing 
 
 {{ ... }}
 # Run all tests
@@ -158,9 +158,9 @@ python -m pytest tests/
 # Run tests with verbose output
 python -m pytest tests/ -v
 
-## Advanced Configuration 🎛️
+## Advanced Configuration 
 
-### Graph Attributes 📊
+### Graph Attributes 
 
 ```
 % graph_bgcolor: transparent  # Background color (default: transparent)
@@ -172,7 +172,7 @@ python -m pytest tests/ -v
 % graph_ranksep: 0.8         # Vertical separation between nodes (default: 0.8)
 ```
 
-### Node Attributes 🔵
+### Node Attributes 
 
 ```
 % node_fontname: Courier     # Font for node labels (default: Courier)
@@ -194,7 +194,7 @@ python -m pytest tests/ -v
 % edge_penwidth: 0.8         # Edge line thickness (default: 0.8)
 ```
 
-### Auto-Shapes 🤖
+### Auto-Shapes 
 
 Drawn automatically selects appropriate node shapes based on node names to improve diagram readability:
 
@@ -203,7 +203,7 @@ Drawn automatically selects appropriate node shapes based on node names to impro
 % auto_shapes: false    # Disable automatic shape selection
 ```
 
-**Shape Mappings:** 🗺️
+**Shape Mappings:** 
 - **Databases** (`db`, `database`, `sql`, `postgres`, `mysql`) → `cylinder`
 - **Caches** (`cache`, `redis`, `memcached`) → `box3d`
 - **Queues** (`queue`, `kafka`, `rabbitmq`) → `parallelogram`
