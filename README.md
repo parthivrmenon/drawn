@@ -16,7 +16,7 @@ Oceans -(evaporation)-> Evaporation
 ```
 To this diagram:
 
-<img src="./docs/water_cycle.svg" alt="Water Cycle Diagram" width="300"/>
+<img src="https://raw.githubusercontent.com/parthivrmenon/drawn/master/docs/water_cycle.svg" alt="Water Cycle Diagram" width="300"/>
 
 ## What's Inside? 
 - [Features](#features)
@@ -131,17 +131,17 @@ Drawn supports three built-in themes that control the visual styling of your dia
 #### Examples
 <summary>Clean and simple on white background</summary>
 <br/>
-<img src="./docs/light.svg" alt="Light Theme" width="300"/>
+<img src="https://raw.githubusercontent.com/parthivrmenon/drawn/master/docs/light.svg" alt="Light Theme" width="300"/>
 <br/>
 
 <summary>High contrast on dark background</summary>
 <br/>
-<img src="./docs/dark.svg" alt="Dark Theme" width="300"/>
+<img src="https://raw.githubusercontent.com/parthivrmenon/drawn/master/docs/dark.svg" alt="Dark Theme" width="300"/>
 <br/>
 
 <summary>Terminal-style hacker aesthetic</summary>
 <br/>
-<img src="./docs/matrix.svg" alt="Matrix Theme" width="300"/>
+<img src="https://raw.githubusercontent.com/parthivrmenon/drawn/master/docs/matrix.svg" alt="Matrix Theme" width="300"/>
 <br/>
 
 **Available Themes:**
