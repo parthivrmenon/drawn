@@ -1,5 +1,6 @@
 import sys
 
+from drawn import __version__
 from drawn.compiler import Compiler
 from drawn.config import Config
 from drawn.parser import Parser
@@ -10,6 +11,11 @@ def main():
     if len(sys.argv) < 2:
         print("Usage: drawn <file_path>")
         sys.exit(1)
+
+    if sys.argv[1] == "--version":
+        # read __version__ from drawn/__init__.py
+        print(f"drawn version {__version__}")
+        sys.exit(0)
 
     file_path = sys.argv[1]
     reader = Reader(file_path)
