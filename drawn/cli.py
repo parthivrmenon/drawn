@@ -2,8 +2,6 @@ import sys
 
 from drawn import __version__
 from drawn.compiler import Compiler
-from drawn.config import Config
-from drawn.parser import Parser
 from drawn.reader import Reader
 
 
@@ -13,17 +11,12 @@ def main():
         sys.exit(1)
 
     if sys.argv[1] == "--version":
-        # read __version__ from drawn/__init__.py
         print(f"drawn version {__version__}")
         sys.exit(0)
 
     file_path = sys.argv[1]
-    reader = Reader(file_path)
-    flows, configs = reader.flows, reader.configs
-
-    config = Config(configs)
-    nodes, edges = Parser(flows).parse()
-    compiler = Compiler(nodes, edges, config=config)
+    digraph = Reader(file_path).read()
+    compiler = Compiler(digraph)
     compiler.render()
 
 

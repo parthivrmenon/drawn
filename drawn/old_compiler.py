@@ -9,16 +9,7 @@ class Compiler:
         self.dot = Digraph(
             comment=digraph.config.comment, format=digraph.config.output_format
         )
-
-    """
-            self.node_fillcolor = "#001100"  # Very dark green
-            self.node_fontcolor = "#00FF00"  # Bright green text
-            self.node_color = "#00FF00"  # Bright green border
-            self.edge_color = "#00FF00"  # Bright green lines
-            self.edge_fontcolor = "#00FF00"  # Bright green edge text
-
-    """
-
+        
     def set_graph_attributes(self, theme: str):
         self.dot.attr(dpi="300")
         self.dot.attr(rankdir="TB")
@@ -82,10 +73,7 @@ class Compiler:
         self.set_edge_attributes(self.digraph.config.theme)
 
         for node in self.digraph.nodes:
-            node_attrs = {"label": node.label}
-            if node.shape:
-                node_attrs["shape"] = node.shape
-            self.dot.node(name=node.name, **node_attrs)
+            self.dot.node(node.name, label=node.label)
         for edge in self.digraph.edges:
             if edge.label:
                 self.dot.edge(edge.src.name, edge.dst.name, xlabel=edge.label)

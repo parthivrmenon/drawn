@@ -1,15 +1,13 @@
 from drawn.model.digraph import Config, DirectedGraph, Edge, Node
-from drawn.shapes import get_auto_shape_for_node
 
 
 class Reader:
     """
-    Implements the reader for .drawn files
+    Takes a filepath and return a Digraph
     """
 
     def __init__(self, filepath: str):
         self.filepath = filepath
-        self.config = None  # will be set in parse_config
 
     def parse_config(self, config_lines: list[str]) -> Config:
         # init with default values
@@ -18,24 +16,13 @@ class Reader:
             output_file="flow",
             output_format="svg",
             theme="light",
-            auto_shapes=True,
         )
         for line in config_lines:
             line = line.strip()
-            if not line or not line.startswith("%"):
-                continue  # skip empty lines and non-config lines
-
-            line = line.removeprefix("%").strip()
-            if ":" not in line:
-                continue  # skip invalid config lines
-
-            key, value = line.split(":")
+            config_line = line.removeprefix("%").strip()
+            key, value = config_line.split(":")
             key = key.strip()
             value = value.strip()
-
-            if not key:
-                continue  # skip empty keys
-
             if key == "theme":
                 config.theme = value
             elif key == "output_file":
@@ -44,16 +31,10 @@ class Reader:
                 config.output_format = value
             elif key == "comment":
                 config.comment = value
-            elif key == "auto_shapes":
-                if value.lower() in ["true", "yes", "1"]:
-                    config.auto_shapes = True
-                elif value.lower() in ["false", "no", "0"]:
-                    config.auto_shapes = False
-                else:
-                    raise ValueError(f"Unexpected auto_shapes value: {value}")
             else:
                 raise ValueError(f"Unexpected config key: {key}")
 
+        print(config)
         return config
 
     def parse(self, flows: list[str]) -> tuple[list[Node], list[Edge]]:
@@ -66,20 +47,10 @@ class Reader:
                 src = parts[i]
                 arrow = parts[i + 1]
                 dst = parts[i + 2]
+                nodes[src] = Node(src, src)
+                nodes[dst] = Node(dst, dst)
 
-                if src not in nodes:
-                    if self.config.auto_shapes:
-                        src_shape = get_auto_shape_for_node(src)
-                    else:
-                        src_shape = get_auto_shape_for_node("default")
-                    nodes[src] = Node(src, src, src_shape)
-                if dst not in nodes:
-                    if self.config.auto_shapes:
-                        dst_shape = get_auto_shape_for_node(dst)
-                    else:
-                        dst_shape = get_auto_shape_for_node("default")
-                    nodes[dst] = Node(dst, dst, dst_shape)
-                if arrow == "-->" or arrow == "->":
+                if arrow == "-->":
                     edge = Edge(nodes[src], nodes[dst], None)
                 elif arrow.startswith("-(") and arrow.endswith(")->"):
                     arrow_label = arrow.split("-(")[1].split(")->")[0]
@@ -104,11 +75,12 @@ class Reader:
                 flow_lines.append(line)
             else:
                 config_lines.append(line)
-        self.config = self.parse_config(config_lines)
+
         nodes, edges = self.parse(flow_lines)
+        config = self.parse_config(config_lines)
 
         return DirectedGraph(
             nodes=nodes,
             edges=edges,
-            config=self.config,
+            config=config,
         )
