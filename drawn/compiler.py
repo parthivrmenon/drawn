@@ -4,20 +4,15 @@ from drawn.model.digraph import DirectedGraph
 
 
 class Compiler:
+    """
+    Implements the compiler for .drawn files
+    """
+
     def __init__(self, digraph: DirectedGraph):
         self.digraph = digraph
         self.dot = Digraph(
             comment=digraph.config.comment, format=digraph.config.output_format
         )
-
-    """
-            self.node_fillcolor = "#001100"  # Very dark green
-            self.node_fontcolor = "#00FF00"  # Bright green text
-            self.node_color = "#00FF00"  # Bright green border
-            self.edge_color = "#00FF00"  # Bright green lines
-            self.edge_fontcolor = "#00FF00"  # Bright green edge text
-
-    """
 
     def set_graph_attributes(self, theme: str):
         self.dot.attr(dpi="300")
