@@ -8,4 +8,4 @@ Oceans -(evaporation)-> Evaporation
 % output_file: water_cycle
 % output_format: svg
 % comment: Water Cycle
-% theme: dark
+% theme: matrix
