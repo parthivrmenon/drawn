@@ -12,49 +12,42 @@ class Reader:
         self.config = None  # will be set in parse_config
 
     def parse_config(self, config_lines: list[str]) -> Config:
-        # init with default values
-        config = Config(
-            comment="Flow",
-            output_file="flow",
-            output_format="svg",
-            theme="light",
-            auto_shapes=True,
-        )
+        """Parse configuration lines into a Config object.
+        
+        Extracts key-value pairs from lines starting with '%' and delegates
+        validation to the Config dataclass.
+        
+        Args:
+            config_lines: List of lines from the .drawn file
+            
+        Returns:
+            Config object with parsed settings
+            
+        Raises:
+            ValueError: If configuration contains invalid keys or values
+        """
+        config_dict = {}
         for line in config_lines:
             line = line.strip()
             if not line or not line.startswith("%"):
-                continue  # skip empty lines and non-config lines
-
+                continue
             line = line.removeprefix("%").strip()
             if ":" not in line:
-                continue  # skip invalid config lines
-
-            key, value = line.split(":")
+                continue
+            key, value = line.split(":", 1)  # maxsplit=1 for values containing ":"
             key = key.strip()
             value = value.strip()
-
-            if not key:
-                continue  # skip empty keys
-
-            if key == "theme":
-                config.theme = value
-            elif key == "output_file":
-                config.output_file = value
-            elif key == "output_format":
-                config.output_format = value
-            elif key == "comment":
-                config.comment = value
-            elif key == "auto_shapes":
-                if value.lower() in ["true", "yes", "1"]:
-                    config.auto_shapes = True
-                elif value.lower() in ["false", "no", "0"]:
-                    config.auto_shapes = False
-                else:
-                    raise ValueError(f"Unexpected auto_shapes value: {value}")
-            else:
-                raise ValueError(f"Unexpected config key: {key}")
-
-        return config
+            
+            # Type conversion for boolean fields
+            if key == "auto_shapes":
+                value = value.lower() in ["true", "yes", "1"]
+            
+            config_dict[key] = value
+        
+        try:
+            return Config(**config_dict)
+        except TypeError as e:
+            raise ValueError(f"Invalid configuration: {e}") from e
 
     def parse(self, flows: list[str]) -> tuple[list[Node], list[Edge]]:
         edges = []
