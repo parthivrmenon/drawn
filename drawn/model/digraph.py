@@ -4,10 +4,10 @@ from typing import List, Optional
 
 @dataclass
 class Config:
-    comment: str
-    output_file: str
-    output_format: str
-    theme: str
+    comment: str = "Flow"
+    output_file: str = "flow"
+    output_format: str = "svg"
+    theme: str = "light"
     auto_shapes: bool = True
 
 
