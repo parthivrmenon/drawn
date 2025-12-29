@@ -15,7 +15,6 @@ class Config:
 class Node:
     name: str
     label: str
-    shape: Optional[str] = None
 
 
 @dataclass
