@@ -25,15 +25,15 @@ def test_compiler():
         auto_shapes=True,
     )
     digraph = DirectedGraph(nodes=nodes, edges=edges, config=config)
-    dot_src = Compiler(digraph=digraph).compile()
+    dot_src = Compiler.compile(digraph)
     assert type(dot_src) == str
     lines = dot_src.splitlines()
     assert "// Flow" in lines[0]
     assert "digraph" in lines[1]
-    assert "\tSun [label=Sun]" in lines
-    assert "\tEvaporation [label=Evaporation]" in lines
-    assert "\tClouds [label=Clouds]" in lines
-    assert "\tOceans [label=Oceans]" in lines
+    assert "\tSun [label=Sun shape=box]" in lines
+    assert "\tEvaporation [label=Evaporation shape=box]" in lines
+    assert "\tClouds [label=Clouds shape=box]" in lines
+    assert "\tOceans [label=Oceans shape=box]" in lines
     assert "\tSun -> Evaporation" in lines
     assert "\tEvaporation -> Clouds [xlabel=condensation]" in lines
     assert "\tClouds -> Rain [xlabel=precipitation]" in lines

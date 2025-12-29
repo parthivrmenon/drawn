@@ -16,8 +16,7 @@ def main():
 
     file_path = sys.argv[1]
     digraph = Reader(file_path).read()
-    compiler = Compiler(digraph)
-    compiler.render()
+    Compiler.render(digraph)
 
 
 if __name__ == "__main__":

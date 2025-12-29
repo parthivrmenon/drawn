@@ -1,29 +1,106 @@
 from graphviz import Digraph
 
 from drawn.model.digraph import DirectedGraph
+from drawn.shapes import get_auto_shape_for_node
 from drawn.themes import get_theme
 
 
 class Compiler:
+    """Compiles DirectedGraph objects into Graphviz DOT format.
+    
+    This class provides static methods for transforming DirectedGraph data
+    structures into DOT source code and rendered diagram files.
     """
-    Implements the compiler for .drawn files
-    """
 
-    def __init__(self, digraph: DirectedGraph):
-        self.digraph = digraph
-        self.dot = Digraph(
-            comment=digraph.config.comment, format=digraph.config.output_format
-        )
-
-    def apply_attributes(self, theme: str):
-        """Apply all theme attributes (graph, node, edge) to the diagram.
-
-        Merges common attributes with theme-specific styling and applies them
-        to the graphviz Digraph instance.
-
+    @staticmethod
+    def compile(digraph: DirectedGraph) -> str:
+        """Compile a DirectedGraph into DOT source code.
+        
         Args:
-            theme: Theme name (e.g., 'light', 'dark', 'matrix')
+            digraph: The DirectedGraph to compile
+            
+        Returns:
+            str: DOT source code
+            
+        Raises:
+            ValueError: If theme is not recognized
+        """
+        dot = Digraph(
+            comment=digraph.config.comment,
+            format=digraph.config.output_format
+        )
+        
+        # Apply theme attributes
+        Compiler._apply_attributes(dot, digraph.config.theme)
+        
+        # Add nodes
+        for node in digraph.nodes:
+            node_attrs = {"label": node.label}
+            
+            # Apply auto-shape selection if enabled
+            if digraph.config.auto_shapes:
+                node_attrs["shape"] = get_auto_shape_for_node(node.name)
+            else:
+                node_attrs["shape"] = "box"
+            
+            dot.node(name=node.name, **node_attrs)
+        
+        # Add edges
+        for edge in digraph.edges:
+            if edge.label:
+                dot.edge(edge.src.name, edge.dst.name, xlabel=edge.label)
+            else:
+                dot.edge(edge.src.name, edge.dst.name)
+        
+        return dot.source
 
+    @staticmethod
+    def render(digraph: DirectedGraph) -> None:
+        """Compile and render a DirectedGraph to a file.
+        
+        Args:
+            digraph: The DirectedGraph to render
+            
+        Raises:
+            ValueError: If theme is not recognized
+        """
+        dot = Digraph(
+            comment=digraph.config.comment,
+            format=digraph.config.output_format
+        )
+        
+        # Apply theme attributes
+        Compiler._apply_attributes(dot, digraph.config.theme)
+        
+        # Add nodes
+        for node in digraph.nodes:
+            node_attrs = {"label": node.label}
+            
+            # Apply auto-shape selection if enabled
+            if digraph.config.auto_shapes:
+                node_attrs["shape"] = get_auto_shape_for_node(node.name)
+            else:
+                node_attrs["shape"] = "box"
+            
+            dot.node(name=node.name, **node_attrs)
+        
+        # Add edges
+        for edge in digraph.edges:
+            if edge.label:
+                dot.edge(edge.src.name, edge.dst.name, xlabel=edge.label)
+            else:
+                dot.edge(edge.src.name, edge.dst.name)
+        
+        dot.render(digraph.config.output_file, view=False, cleanup=True)
+
+    @staticmethod
+    def _apply_attributes(dot: Digraph, theme: str) -> None:
+        """Apply theme attributes to a Digraph instance.
+        
+        Args:
+            dot: The Digraph instance to modify
+            theme: Theme name (e.g., 'light', 'dark', 'matrix')
+            
         Raises:
             ValueError: If theme is not recognized
         """
@@ -34,30 +111,8 @@ class Compiler:
         # - Node/Edge attrs: use ._attr dict with direct assignment
 
         for key, val in config["graph"].items():
-            self.dot.attr(**{key: val})
+            dot.attr(**{key: val})
         for key, val in config["node"].items():
-            self.dot.node_attr[key] = val
+            dot.node_attr[key] = val
         for key, val in config["edge"].items():
-            self.dot.edge_attr[key] = val
-
-    def compile(self):
-        """
-        produces DOT source
-        """
-        self.apply_attributes(self.digraph.config.theme)
-
-        for node in self.digraph.nodes:
-            node_attrs = {"label": node.label}
-            if node.shape:
-                node_attrs["shape"] = node.shape
-            self.dot.node(name=node.name, **node_attrs)
-        for edge in self.digraph.edges:
-            if edge.label:
-                self.dot.edge(edge.src.name, edge.dst.name, xlabel=edge.label)
-            else:
-                self.dot.edge(edge.src.name, edge.dst.name)
-        return self.dot.source
-
-    def render(self):
-        self.compile()
-        self.dot.render(self.digraph.config.output_file, view=False, cleanup=True)
+            dot.edge_attr[key] = val
